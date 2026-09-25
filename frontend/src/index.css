@@ -157,6 +157,20 @@ body {
   box-shadow: inset 0 0 90px rgb(0 0 0 / 0.35);
 }
 
+.auth-benefits li::before {
+  content: "✓";
+  display: inline-grid;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-right: 0.55rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #6848ed;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
 .auth-brand-mark {
   display: grid;
   width: 2.5rem;
