@@ -8,9 +8,9 @@
   --color-hub-card: #1e293b;
   --color-hub-border: #334155;
   --color-hub-muted: #94a3b8;
-  --color-hub-accent: #3b82f6;
-  --color-hub-accent-2: #6366f1;
-  --color-hub-purple: #7c3aed;
+  --color-hub-accent: #6257e8;
+  --color-hub-accent-2: #8b5cf6;
+  --color-hub-purple: #a855f7;
   --color-hub-gold: #fbbf24;
   --color-hub-success: #22c55e;
   --color-hub-danger: #ef4444;
@@ -29,7 +29,7 @@ body {
 }
 
 .hub-gradient-text {
-  background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 45%, #a78bfa 100%);
+  background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 45%, #f0abfc 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -44,9 +44,52 @@ body {
 
 .hub-landing-hero {
   background:
-    linear-gradient(105deg, rgb(15 23 42 / 0.97) 0%, rgb(15 23 42 / 0.75) 42%, rgb(15 23 42 / 0.35) 100%),
+    linear-gradient(105deg, rgb(7 21 37 / 0.97) 0%, rgb(7 21 37 / 0.72) 42%, rgb(7 21 37 / 0.2) 100%),
     var(--hero-image, none) center / cover no-repeat;
 }
+
+.hub-landing-page {
+  background: #f8fbff;
+}
+
+.hub-landing-page > section:not(.hub-landing-hero) {
+  color: #172033;
+}
+
+.hub-landing-page > section:not(.hub-landing-hero) h2,
+.hub-landing-page > section:not(.hub-landing-hero) h3 {
+  color: #12203a;
+}
+
+.hub-landing-page > section:not(.hub-landing-hero) p {
+  color: #64748b;
+}
+
+.hub-landing-page > section:nth-of-type(2) {
+  background: #ffffff;
+  border-color: #dbe5f2;
+}
+
+.hub-landing-page > section:nth-of-type(3) {
+  background: #f8fbff;
+}
+
+.hub-landing-page > section:nth-of-type(4) {
+  background: #edf3fb;
+  border-color: #dbe5f2;
+}
+
+.hub-landing-page > section:nth-of-type(5) {
+  background: #ffffff;
+  border-color: #dbe5f2;
+}
+
+.hub-landing-page > section:nth-of-type(4) .rounded-2xl {
+  border-color: #dbe5f2;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(30 64 175 / 0.06);
+}
+
 
 .hub-card {
   border-radius: 0.75rem;
@@ -69,9 +112,9 @@ body {
 }
 
 .hub-btn-primary {
-  background: var(--color-hub-accent);
+  background: linear-gradient(135deg, #6257e8, #8b5cf6);
   color: white;
-  box-shadow: 0 4px 14px rgb(59 130 246 / 0.35);
+  box-shadow: 0 4px 18px rgb(98 87 232 / 0.35);
 }
 
 .hub-btn-primary:hover:not(:disabled) {
@@ -98,6 +141,126 @@ body {
 .hub-header-transparent {
   background: transparent;
   border-bottom: 1px solid transparent;
+}
+
+.auth-page {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.75fr);
+  gap: 1rem;
+  color: #172033;
+}
+
+.auth-visual {
+  background:
+    radial-gradient(circle at 70% 22%, rgb(124 58 237 / 0.7), transparent 18rem),
+    linear-gradient(145deg, #071326 0%, #101c4b 48%, #220b49 100%);
+  box-shadow: inset 0 0 90px rgb(0 0 0 / 0.35);
+}
+
+.auth-benefits li::before {
+  content: "✓";
+  display: inline-grid;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-right: 0.55rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #6848ed;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.auth-brand-mark {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 0.85rem;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: white;
+  font-size: 1.3rem;
+  box-shadow: 0 10px 24px rgb(124 58 237 / 0.35);
+}
+
+.auth-form-panel {
+  border: 1px solid #dbe3f0;
+  background: rgb(255 255 255 / 0.98);
+  box-shadow: 0 20px 50px rgb(15 23 42 / 0.12);
+}
+
+.auth-form { border-color: #e2e8f0; background: #f8fafc; }
+.auth-form-panel h1 { color: #111827; }
+.auth-form-panel label span { color: #475569; }
+.auth-form-panel input {
+  border-color: #d8e1ee;
+  background: #f8fbff;
+  color: #111827;
+}
+.auth-form-panel input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgb(99 102 241 / 0.14); }
+.auth-form-panel button { background: linear-gradient(90deg, #4f46e5, #7c3aed); }
+
+@media (max-width: 1023px) {
+  .auth-page { display: block; max-width: 30rem; }
+}
+
+.hub-dashboard-shell {
+  background: #071525;
+}
+
+.hub-dashboard-header {
+  border-color: #dce6f2;
+  background: #ffffff;
+}
+
+.hub-dashboard-header input {
+  border-color: #dbe5f2;
+  background: #f8fbff;
+  color: #1e293b;
+}
+
+.hub-dashboard-header a,
+.hub-dashboard-header button {
+  color: #334155;
+}
+
+.hub-dashboard-sidebar {
+  background: #071525;
+  border-color: rgb(148 163 184 / 0.2);
+}
+
+.hub-dashboard-main {
+  background: linear-gradient(180deg, #f8fbff 0%, #eef3fb 100%);
+  color: #172033;
+}
+
+.hub-dashboard-main .hub-card {
+  border-color: #dbe5f2;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(30 64 175 / 0.06);
+}
+
+.hub-dashboard-main .text-white,
+.hub-dashboard-main .text-slate-100,
+.hub-dashboard-main .text-slate-200,
+.hub-dashboard-main .text-slate-300 {
+  color: #172033;
+}
+
+.hub-dashboard-main .text-slate-400,
+.hub-dashboard-main .text-slate-500 {
+  color: #64748b;
+}
+
+.hub-dashboard-main .border-slate-700,
+.hub-dashboard-main .border-slate-800,
+.hub-dashboard-main .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #dbe5f2;
+}
+
+.hub-dashboard-main .bg-slate-800,
+.hub-dashboard-main .bg-slate-900 {
+  background-color: #f7faff;
 }
 
 .hub-panel-light {

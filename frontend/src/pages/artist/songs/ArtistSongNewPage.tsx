@@ -201,7 +201,7 @@ export function ArtistSongNewPage() {
           <p className="text-sm text-zinc-400">
 
             Files upload directly to object storage. After audio upload, a background worker
-            normalizes audio for the AI pipeline (FFmpeg).
+            normalizes audio for lyric processing (FFmpeg).
 
           </p>
 

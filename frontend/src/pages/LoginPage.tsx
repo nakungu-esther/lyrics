@@ -121,21 +121,30 @@ export function LoginPage() {
 
   return (
 
-    <div className="mx-auto max-w-md space-y-8 py-4">
+    <div className="auth-page mx-auto w-full max-w-5xl py-4 sm:py-8">
+      <div className="auth-visual hidden min-h-[620px] flex-col justify-between rounded-3xl p-10 lg:flex">
+        <div><div className="auth-brand-mark">L</div><p className="mt-3 text-sm font-semibold tracking-wide text-white">LyricsHub</p></div>
+        <div><p className="max-w-sm text-4xl font-bold leading-tight text-white">Welcome Back!</p><p className="mt-5 max-w-xs text-sm leading-6 text-slate-300">Sign in to continue creating amazing lyric videos.</p><ul className="auth-benefits mt-6 space-y-3 text-sm text-slate-200"><li>Generate lyric videos with your music</li><li>Sync with your music</li><li>Use beautiful templates</li><li>Share your creations</li></ul><p className="mt-10 text-3xl font-semibold italic text-violet-300">Create<br />Edit<br />Share</p></div>
+      </div>
+      <div className="auth-form-panel mx-auto w-full max-w-md space-y-8 rounded-3xl p-6 sm:p-10">
 
       <div className="space-y-2 text-center sm:text-left">
 
-        <h1 className="text-2xl font-semibold tracking-tight">Log in</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Login to LyricsHub</h1>
 
+<<<<<<< HEAD
         <p className="text-sm text-zinc-400">Access your LyricsHub dashboard.</p>
+=======
+        <p className="text-sm text-zinc-400">Enter your credentials to access your account</p>
+>>>>>>> e711cfddafb0be738c823e5a9c3aae82821ed99c
 
       </div>
 
-      <form onSubmit={onSubmit} className="space-y-4 rounded-xl border border-zinc-800 bg-zinc-900/30 p-6" noValidate>
+      <form onSubmit={onSubmit} className="auth-form space-y-4 rounded-2xl border p-6" noValidate>
 
         <label className="block space-y-1">
 
-          <span className="text-sm text-zinc-400">Email</span>
+          <span className="text-sm text-zinc-400">Email or Username</span>
 
           <Input
 
@@ -219,6 +228,7 @@ export function LoginPage() {
 
       </p>
 
+      </div>
     </div>
 
   );

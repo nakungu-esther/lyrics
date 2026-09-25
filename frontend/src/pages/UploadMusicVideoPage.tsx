@@ -46,7 +46,7 @@ export function UploadMusicVideoPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold">Upload music video</h1>
+        <h1 className="text-2xl font-semibold">Upload Your Song</h1>
         <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
           We extract audio, transcribe and sync lyrics, then overlay them on your original video
           when you render with the <strong className="text-zinc-300">Music Video Overlay</strong>{" "}
