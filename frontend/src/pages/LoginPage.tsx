@@ -121,7 +121,12 @@ export function LoginPage() {
 
   return (
 
-    <div className="mx-auto max-w-md space-y-8 py-4">
+    <div className="auth-page mx-auto w-full max-w-5xl py-4 sm:py-8">
+      <div className="auth-visual hidden min-h-[620px] flex-col justify-between rounded-3xl p-10 lg:flex">
+        <div><div className="auth-brand-mark">L</div><p className="mt-3 text-sm font-semibold tracking-wide text-white">LyricsHub</p></div>
+        <div><p className="max-w-sm text-4xl font-bold leading-tight text-white">Create. Edit.<br /><span className="text-violet-300">Share your story.</span></p><p className="mt-5 max-w-xs text-sm leading-6 text-slate-300">Continue creating beautiful lyric videos with your music and your voice.</p></div>
+      </div>
+      <div className="auth-form-panel mx-auto w-full max-w-md space-y-8 rounded-3xl p-6 sm:p-10">
 
       <div className="space-y-2 text-center sm:text-left">
 
@@ -131,7 +136,7 @@ export function LoginPage() {
 
       </div>
 
-      <form onSubmit={onSubmit} className="space-y-4 rounded-xl border border-zinc-800 bg-zinc-900/30 p-6" noValidate>
+      <form onSubmit={onSubmit} className="auth-form space-y-4 rounded-2xl border p-6" noValidate>
 
         <label className="block space-y-1">
 
@@ -219,6 +224,7 @@ export function LoginPage() {
 
       </p>
 
+      </div>
     </div>
 
   );

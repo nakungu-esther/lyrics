@@ -138,7 +138,12 @@ export function RegisterPage() {
 
   return (
 
-    <div className="mx-auto max-w-md space-y-8 py-4">
+    <div className="auth-page mx-auto w-full max-w-5xl py-4 sm:py-8">
+      <div className="auth-visual hidden min-h-[700px] flex-col justify-between rounded-3xl p-10 lg:flex">
+        <div><div className="auth-brand-mark">L</div><p className="mt-3 text-sm font-semibold tracking-wide text-white">LyricsHub</p></div>
+        <div><p className="max-w-sm text-4xl font-bold leading-tight text-white">Your music<br /><span className="text-violet-300">matters.</span></p><p className="mt-5 max-w-xs text-sm leading-6 text-slate-300">Join a creative home for lyrics, visuals, and stories worth sharing.</p></div>
+      </div>
+      <div className="auth-form-panel mx-auto w-full max-w-md space-y-8 rounded-3xl p-6 sm:p-10">
 
       <div className="space-y-2 text-center sm:text-left">
 
@@ -152,7 +157,7 @@ export function RegisterPage() {
 
         onSubmit={onSubmit}
 
-        className="space-y-4 rounded-xl border border-zinc-800 bg-zinc-900/30 p-6"
+        className="auth-form space-y-4 rounded-2xl border p-6"
 
         noValidate
 
@@ -320,6 +325,7 @@ export function RegisterPage() {
 
       </p>
 
+      </div>
     </div>
 
   );
