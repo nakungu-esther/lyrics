@@ -18,9 +18,10 @@ function timeGreeting(): string {
 }
 
 const DEMO_PROJECTS = [
-  { title: "My Worship Song", status: "Completed" as const, img: MOCKUP_IMAGES.projectThumb1, time: "2 days ago" },
-  { title: "Afrobeat Night", status: "Processing" as const, img: MOCKUP_IMAGES.projectThumb2, time: "5 hr ago" },
-  { title: "Sunday Praise", status: "Completed" as const, img: MOCKUP_IMAGES.projectThumb3, time: "1 week ago" },
+  { title: "My Worship Song", status: "Processing" as const, img: MOCKUP_IMAGES.projectThumb1, time: "45%" },
+  { title: "Forever", status: "Completed" as const, img: MOCKUP_IMAGES.projectThumb2, time: "Completed" },
+  { title: "Nze Mukama", status: "Completed" as const, img: MOCKUP_IMAGES.projectThumb3, time: "Completed" },
+  { title: "Grace", status: "Completed" as const, img: MOCKUP_IMAGES.projectThumb1, time: "Completed" },
 ];
 
 const DEMO_SONGS = [
@@ -57,11 +58,11 @@ export function DashboardHomePage() {
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Total Videos" value={stats?.videos ?? 0} href="/dashboard/videos" icon="videos" />
-        <StatCard label="Total Songs" value={stats?.songs ?? 0} href="/dashboard/songs" icon="songs" />
+        <StatCard label="Total Videos" value={showDemo ? 12 : stats?.videos ?? 0} href="/dashboard/videos" icon="videos" />
+        <StatCard label="Total Songs" value={showDemo ? 8 : stats?.songs ?? 0} href="/dashboard/songs" icon="songs" />
         <StatCard
           label="Templates Used"
-          value={Math.min(stats?.videos ?? 0, 5) || (showDemo ? 5 : 0)}
+          value={showDemo ? 5 : Math.min(stats?.videos ?? 0, 5)}
           href="/dashboard/templates"
           icon="templates"
         />
@@ -71,10 +72,10 @@ export function DashboardHomePage() {
       <div>
         <h2 className="text-lg font-semibold text-white">Quick Actions</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <QuickActionCard title="Upload Video" description="Clip + synced lyrics." href="/create?mode=video" icon="videoClip" />
-          <QuickActionCard title="Upload Audio" description="Template backgrounds." href="/create?mode=audio" icon="audio" />
-          <QuickActionCard title="Create Lyric Video" description="Add lyrics and visuals." href="/create" icon="sparkles" />
-          <QuickActionCard title="Browse Templates" description="Preview styles first." href="/dashboard/templates" icon="templates" />
+          <QuickActionCard title="Upload Video" description="Turn your songs into lyric videos." href="/create?mode=video" icon="videoClip" />
+          <QuickActionCard title="Upload Audio" description="Create lyric videos with audio." href="/create?mode=audio" icon="audio" />
+          <QuickActionCard title="Create Lyric Video" description="Use AI to generate lyrics." href="/create" icon="sparkles" />
+          <QuickActionCard title="Browse Templates" description="Explore curated templates." href="/dashboard/templates" icon="templates" />
         </div>
       </div>
 

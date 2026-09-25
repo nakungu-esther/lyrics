@@ -240,6 +240,23 @@ body {
   box-shadow: 0 8px 24px rgb(30 64 175 / 0.06);
 }
 
+.hub-dashboard-main > div {
+  max-width: 1180px;
+}
+
+.hub-dashboard-main h1 {
+  letter-spacing: -0.035em;
+}
+
+.hub-dashboard-main .hub-card h2,
+.hub-dashboard-main .hub-card h3 {
+  color: #10234d;
+}
+
+.hub-dashboard-main .hub-card a.text-blue-400 {
+  color: #4f46e5;
+}
+
 .hub-stat-card {
   min-height: 112px;
   border-radius: 0.9rem;
