@@ -80,6 +80,31 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* Workflow */}
+      <section className="border-y border-slate-800/80 bg-slate-950/70 py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div className="max-w-xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-400">Simple by design</p>
+            <h2 className="mt-3 text-2xl font-bold text-white md:text-3xl">From raw audio to a finished story.</h2>
+            <p className="mt-3 text-slate-400">A focused workflow for artists who want their words to land with every beat.</p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["01", "Upload", "Drop in a track or music video."],
+              ["02", "AI analysis", "Detect language and generate lyrics."],
+              ["03", "Make it yours", "Sync lines, choose a template, customize."],
+              ["04", "Share everywhere", "Render once, publish everywhere."],
+            ].map(([number, title, description]) => (
+              <div key={number} className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 transition hover:-translate-y-1 hover:border-violet-500/50">
+                <span className="text-sm font-semibold text-violet-400">{number}</span>
+                <h3 className="mt-8 font-semibold text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Bottom CTA band */}
       <section id="pricing" className="scroll-mt-24 border-t border-slate-800 bg-slate-900/80 py-14">
         <div className="mx-auto max-w-2xl px-4 text-center">

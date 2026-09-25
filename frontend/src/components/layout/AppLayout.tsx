@@ -48,7 +48,7 @@ export function AppLayout() {
 
       >
 
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 md:px-8">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-4 md:px-8">
 
           <BrandLogo />
 
