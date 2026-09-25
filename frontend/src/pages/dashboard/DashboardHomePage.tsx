@@ -47,7 +47,7 @@ export function DashboardHomePage() {
         <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
           {timeGreeting()}, {firstName}
         </h1>
-        <p className="mt-2 text-slate-400">Your creator home — videos, songs, and templates in one place.</p>
+        <p className="mt-2 text-slate-400">Create amazing videos from your songs.</p>
       </div>
 
       {dashboard.isError && (
@@ -69,11 +69,11 @@ export function DashboardHomePage() {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold text-white">Quick actions</h2>
+        <h2 className="text-lg font-semibold text-white">Quick Actions</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <QuickActionCard title="Upload Video" description="Clip + synced lyrics." href="/create?mode=video" icon="videoClip" />
           <QuickActionCard title="Upload Audio" description="Template backgrounds." href="/create?mode=audio" icon="audio" />
-          <QuickActionCard title="Create New Video" description="Complete video workflow." href="/create" icon="sparkles" />
+          <QuickActionCard title="Create Lyric Video" description="Add lyrics and visuals." href="/create" icon="sparkles" />
           <QuickActionCard title="Browse Templates" description="Preview styles first." href="/dashboard/templates" icon="templates" />
         </div>
       </div>
