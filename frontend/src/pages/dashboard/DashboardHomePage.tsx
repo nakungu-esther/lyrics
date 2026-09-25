@@ -42,7 +42,7 @@ export function DashboardHomePage() {
   const showDemo = (stats?.videos ?? 0) === 0 && (stats?.songs ?? 0) === 0;
 
   return (
-    <div className="space-y-10 pb-8">
+    <div className="space-y-8 pb-8 md:space-y-10">
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
           {timeGreeting()}, {firstName}
