@@ -146,8 +146,8 @@ export function StudioEditorPage() {
         <p className="text-sm text-red-400">{pipeline.message}</p>
       )}
 
-      <div className="grid gap-8 xl:grid-cols-[1fr_300px]">
-        <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid min-w-0 gap-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:gap-8">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-2 lg:gap-8">
         <div className="space-y-4 lg:col-span-1">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-indigo-300/80">
             Live preview

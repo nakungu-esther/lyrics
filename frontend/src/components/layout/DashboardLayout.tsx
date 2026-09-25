@@ -46,7 +46,7 @@ export function DashboardLayout() {
           </div>
         )}
 
-        <main className="flex-1 overflow-auto p-4 md:p-8">
+        <main className="min-w-0 flex-1 overflow-auto p-4 pb-24 md:p-8 md:pb-8">
           <div className={wide ? "mx-auto max-w-[1600px]" : "mx-auto max-w-6xl"}>
             <Outlet />
           </div>

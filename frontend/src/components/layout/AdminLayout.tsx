@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { IconButton } from "../ui/IconButton";
 import { UserMenu } from "./UserMenu";
 import { AdminSidebar } from "./AdminSidebar";
+import { AdminMobileBottomNav } from "./AdminMobileBottomNav";
 
 export function AdminLayout() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -40,11 +41,12 @@ export function AdminLayout() {
             <UserMenu />
           </div>
         </header>
-        <main className="flex-1 overflow-auto p-4 md:p-8">
+        <main className="min-w-0 flex-1 overflow-auto p-4 pb-24 md:p-8 md:pb-8">
           <div className="mx-auto max-w-6xl">
             <Outlet />
           </div>
         </main>
+        <AdminMobileBottomNav />
       </div>
     </div>
   );
