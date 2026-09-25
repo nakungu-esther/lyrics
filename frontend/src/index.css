@@ -44,9 +44,52 @@ body {
 
 .hub-landing-hero {
   background:
-    linear-gradient(105deg, rgb(15 23 42 / 0.97) 0%, rgb(15 23 42 / 0.75) 42%, rgb(15 23 42 / 0.35) 100%),
+    linear-gradient(105deg, rgb(7 21 37 / 0.97) 0%, rgb(7 21 37 / 0.72) 42%, rgb(7 21 37 / 0.2) 100%),
     var(--hero-image, none) center / cover no-repeat;
 }
+
+.hub-landing-page {
+  background: #f8fbff;
+}
+
+.hub-landing-page > section:not(.hub-landing-hero) {
+  color: #172033;
+}
+
+.hub-landing-page > section:not(.hub-landing-hero) h2,
+.hub-landing-page > section:not(.hub-landing-hero) h3 {
+  color: #12203a;
+}
+
+.hub-landing-page > section:not(.hub-landing-hero) p {
+  color: #64748b;
+}
+
+.hub-landing-page > section:nth-of-type(2) {
+  background: #ffffff;
+  border-color: #dbe5f2;
+}
+
+.hub-landing-page > section:nth-of-type(3) {
+  background: #f8fbff;
+}
+
+.hub-landing-page > section:nth-of-type(4) {
+  background: #edf3fb;
+  border-color: #dbe5f2;
+}
+
+.hub-landing-page > section:nth-of-type(5) {
+  background: #ffffff;
+  border-color: #dbe5f2;
+}
+
+.hub-landing-page > section:nth-of-type(4) .rounded-2xl {
+  border-color: #dbe5f2;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(30 64 175 / 0.06);
+}
+
 
 .hub-card {
   border-radius: 0.75rem;
@@ -145,6 +188,31 @@ body {
 
 @media (max-width: 1023px) {
   .auth-page { display: block; max-width: 30rem; }
+}
+
+.hub-dashboard-shell {
+  background: #071525;
+}
+
+.hub-dashboard-header {
+  border-color: #dce6f2;
+  background: #ffffff;
+}
+
+.hub-dashboard-header input {
+  border-color: #dbe5f2;
+  background: #f8fbff;
+  color: #1e293b;
+}
+
+.hub-dashboard-header a,
+.hub-dashboard-header button {
+  color: #334155;
+}
+
+.hub-dashboard-sidebar {
+  background: #071525;
+  border-color: rgb(148 163 184 / 0.2);
 }
 
 .hub-dashboard-main {

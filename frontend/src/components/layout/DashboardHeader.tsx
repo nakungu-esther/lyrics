@@ -11,7 +11,7 @@ type DashboardHeaderProps = {
 
 export function DashboardHeader({ onOpenNav }: DashboardHeaderProps) {
   return (
-    <header className="sticky top-0 z-40 flex h-14 shrink-0 items-center gap-4 border-b border-slate-700/80 bg-slate-900/95 px-4 backdrop-blur md:px-6">
+    <header className="hub-dashboard-header sticky top-0 z-40 flex h-14 shrink-0 items-center gap-4 border-b border-slate-700/80 bg-slate-900/95 px-4 backdrop-blur md:px-6">
       <IconButton
         icon="menu"
         aria-label="Open menu"

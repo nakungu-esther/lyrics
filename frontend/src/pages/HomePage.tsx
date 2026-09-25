@@ -13,7 +13,7 @@ export function HomePage() {
   const startHref = user ? "/create" : "/register";
 
   return (
-    <div className="pb-0">
+    <div className="hub-landing-page pb-0">
       {/* Hero — full-width singer photo + headline */}
       <section
         className="hub-landing-hero relative min-h-[520px] md:min-h-[580px]"

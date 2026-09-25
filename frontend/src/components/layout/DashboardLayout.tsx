@@ -14,11 +14,11 @@ export function DashboardLayout() {
   const wide = isStudio;
 
   return (
-    <div className="hub-shell-bg flex min-h-screen flex-col text-zinc-100">
+    <div className="hub-dashboard-shell flex min-h-screen flex-col text-zinc-100">
       <DashboardHeader onOpenNav={() => setMobileNavOpen(true)} />
 
       <div className="flex flex-1 pb-16 lg:pb-0">
-        <aside className="hidden w-60 shrink-0 border-r border-slate-700/80 bg-slate-900/40 p-4 lg:flex lg:flex-col">
+        <aside className="hub-dashboard-sidebar hidden w-60 shrink-0 border-r border-slate-700/80 bg-slate-900/40 p-4 lg:flex lg:flex-col">
           <DashboardSidebar className="flex-1" />
         </aside>
 
