@@ -138,13 +138,18 @@ export function RegisterPage() {
 
   return (
 
-    <div className="mx-auto max-w-md space-y-8 py-4">
+    <div className="auth-page mx-auto w-full max-w-5xl py-4 sm:py-8">
+      <div className="auth-visual hidden min-h-[700px] flex-col justify-between rounded-3xl p-10 lg:flex">
+        <div><div className="auth-brand-mark">L</div><p className="mt-3 text-sm font-semibold tracking-wide text-white">LyricsHub</p></div>
+        <div><p className="max-w-sm text-4xl font-bold leading-tight text-white">Join LyricsHub</p><p className="mt-5 max-w-xs text-sm leading-6 text-slate-300">Create your account and start turning your music into beautiful lyric videos.</p><ul className="auth-benefits mt-6 space-y-3 text-sm text-slate-200"><li>Unlimited lyric videos</li><li>Access to premium templates</li><li>Cloud storage</li><li>Share with the world</li></ul><p className="mt-10 text-3xl font-semibold italic text-violet-300">Your Music<br />Matters</p></div>
+      </div>
+      <div className="auth-form-panel mx-auto w-full max-w-md space-y-8 rounded-3xl p-6 sm:p-10">
 
       <div className="space-y-2 text-center sm:text-left">
 
-        <h1 className="text-2xl font-semibold tracking-tight">Create account</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Create Your Account</h1>
 
-        <p className="text-sm text-zinc-400">Join Nyimba to save lyrics and videos.</p>
+        <p className="text-sm text-zinc-400">Join LyricsHub and start creating today</p>
 
       </div>
 
@@ -152,7 +157,7 @@ export function RegisterPage() {
 
         onSubmit={onSubmit}
 
-        className="space-y-4 rounded-xl border border-zinc-800 bg-zinc-900/30 p-6"
+        className="auth-form space-y-4 rounded-2xl border p-6"
 
         noValidate
 
@@ -162,7 +167,7 @@ export function RegisterPage() {
 
           <label className="block space-y-1">
 
-            <span className="text-sm text-zinc-400">First name</span>
+            <span className="text-sm text-zinc-400">Full Name</span>
 
             <Input
 
@@ -320,6 +325,7 @@ export function RegisterPage() {
 
       </p>
 
+      </div>
     </div>
 
   );

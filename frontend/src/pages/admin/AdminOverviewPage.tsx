@@ -32,8 +32,8 @@ export function AdminOverviewPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-white">Platform overview</h2>
-        <p className="mt-1 text-sm text-slate-400">Users, content, and system status at a glance.</p>
+        <h2 className="text-2xl font-bold text-white">Platform Overview</h2>
+        <p className="mt-1 text-sm text-slate-400">System performance and key metrics.</p>
       </div>
 
       {overview.isLoading && <p className="text-sm text-slate-500">Loading…</p>}
@@ -42,14 +42,14 @@ export function AdminOverviewPage() {
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard label="Total Users" value={s.users} icon="users" />
-            <StatCard label="Artists" value={s.artists} icon="artist" />
-            <StatCard label="Songs" value={s.songs} icon="songs" />
-            <StatCard label="Video templates" value={s.templates} icon="templates" />
+            <StatCard label="Total Artists" value={s.artists} icon="artist" />
+            <StatCard label="Total Songs" value={s.songs} icon="songs" />
+            <StatCard label="Total Videos" value={s.templates} icon="templates" />
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
             <section className="hub-card rounded-xl p-6 lg:col-span-2">
-              <h3 className="font-semibold text-white">Platform growth</h3>
+              <h3 className="font-semibold text-white">Platform Growth</h3>
               <div className="mt-6 flex h-44 items-end justify-between gap-2 border-b border-slate-700/50 pb-2">
                 {[35, 42, 40, 58, 52, 70, 78, 85].map((h, i) => (
                   <div key={i} className="flex flex-1 flex-col items-center gap-1">
@@ -75,7 +75,7 @@ export function AdminOverviewPage() {
             </section>
 
             <section className="hub-card rounded-xl p-6">
-              <h3 className="font-semibold text-white">System health</h3>
+              <h3 className="font-semibold text-white">System Health</h3>
               <ul className="mt-4 space-y-3 text-sm">
                 {["API", "Database", "Media processing", "Storage"].map((name) => (
                   <li key={name} className="flex items-center justify-between text-slate-300">
@@ -92,7 +92,7 @@ export function AdminOverviewPage() {
 
           <div className="grid gap-6 lg:grid-cols-2">
             <section className="hub-card rounded-xl p-6">
-              <h3 className="font-semibold text-white">Recent activity</h3>
+              <h3 className="font-semibold text-white">Recent Activity</h3>
               <ul className="mt-4 space-y-3">
                 {ACTIVITY_PREVIEW.map((a) => (
                   <li key={a.text} className="flex items-start gap-3 text-sm">
