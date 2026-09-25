@@ -1,31 +1,19 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.Python
-*.egg-info/
+# Node
+node_modules/
 dist/
-build/
-.eggs/
+.cache/
 
-# Virtual environment
-venv/
-.venv/
-env/
+.env
 
-# Uploaded audio files (user data, can be large)
+# Uploaded / generated media (local dev)
 uploads/
-
-# Exported LRC files
 outputs/
+backend/storage/
+storage/
 
-# audio-separator model cache
+# Model caches
 models/
-audio_separator/models/
-
-# Whisper model cache
-~/.cache/whisper/
+.cache/
 
 # OS
 .DS_Store

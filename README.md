@@ -1,8 +1,18 @@
-# LRCGen
+# Nyimba
 
-**The first open-source, free, fully local AI + manual lyrics sync tool.**
+**AI-powered Ugandan music, lyrics, and lyric-video platform** — artists upload songs and videos, confirm languages (Luganda, English, Runyankole, Lusoga, Acholi, Lugisu, Lugwere, Swahili), get AI transcriptions with timings, verify lyrics, build **Gospel** and other catalogs, and create lyric videos for listeners to search, playlist, and watch.
 
-Create perfectly timed `.lrc` karaoke files from any audio — using OpenAI Whisper for AI transcription, or tap along yourself line by line. No subscriptions. No cloud. Runs entirely on your machine.
+**Product vision:** **[docs/PRODUCT.md](docs/PRODUCT.md)** · **How to run:** **[docs/RUN.md](docs/RUN.md)**
+
+### Monorepo (TypeScript only — no Python)
+
+- **`frontend/`** — React + TypeScript + Vite (Nyimba UI, LRC Studio, lyric-video editor)
+- **`backend/`** — Node.js + Express + Prisma + BullMQ (AI transcription, language detection, render jobs)
+
+**Platform:** `start.bat` or `npm run dev` → **http://127.0.0.1:5173**  
+**Create / LRC / lyric video:** **http://127.0.0.1:5173/create** or **/lrc-studio** → AI on the Node worker (`npm run dev:all`)
+
+Setup: `install.bat` → set `DATABASE_URL` in `backend/.env` → `npm run db:migrate`
 
 ---
 
@@ -90,24 +100,27 @@ The top bar gives you **New Song**, **Tap** (redo tap sync), **Retry** (re-run W
 
 ### 1. Install
 
+Requires **Node.js 20+**.
+
 ```bat
 install.bat
 ```
 
-Then install PyTorch for your platform:
+Copy env and point **`DATABASE_URL`** at your **Neon** Postgres ([docs/DATABASE.md](docs/DATABASE.md)):
 
-```bash
-# CPU — works on any machine
-pip install torch torchvision torchaudio
-
-# NVIDIA GPU — much faster (recommended)
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+```bat
+copy backend\.env.example backend\.env
+npm run db:generate
+npm run db:migrate
 ```
 
-For GPU-accelerated vocal isolation:
-```bash
-pip install "audio-separator[gpu]"
+Optional local Redis for BullMQ:
+
+```bat
+docker compose up -d
 ```
+
+Whisper models download automatically on first transcription (~150 MB for `base`).
 
 ### 2. Run
 
@@ -115,22 +128,16 @@ pip install "audio-separator[gpu]"
 start.bat
 ```
 
-Opens at `http://127.0.0.1:8000`
+Nyimba: `http://127.0.0.1:5173` (API `:4000`). LRC & studio: `/create` or `/lrc-studio`. Use `npm run dev:all` for AI jobs.
 
 ---
 
 ## Manual Installation
 
 ```bash
-python -m venv venv
-venv\Scripts\activate        # Windows
-# source venv/bin/activate   # Linux/macOS
-
-pip install fastapi "uvicorn[standard]" python-multipart openai-whisper
-pip install "audio-separator[cpu]"
-pip install torch torchvision torchaudio
-
-python -m uvicorn app:app --host 127.0.0.1 --port 8000
+npm install
+npm run dev              # API :4000 + UI :5173
+npm run dev:all          # + worker (LRC transcription, language, render)
 ```
 
 ---
@@ -163,20 +170,48 @@ python -m uvicorn app:app --host 127.0.0.1 --port 8000
 | MDX-Net KARA 2 | Fast | Karaoke tracks, cleanest output |
 | Demucs htdemucs_ft | Slow | Best quality, complex mixes |
 
-Models download automatically on first use (~100–300 MB each).
+Vocal isolation uses FFmpeg center-cancel. Full UVR ONNX may be wired in later; model names in the UI are unchanged.
 
 ---
 
-## Tech Stack
+## Technology Stack
 
-| Component | Library |
-|-----------|---------|
-| Backend | [FastAPI](https://fastapi.tiangolo.com/) |
-| AI Transcription | [OpenAI Whisper](https://github.com/openai/whisper) |
-| Vocal Isolation | [audio-separator](https://github.com/nomadkaraoke/python-audio-separator) (UVR5) |
-| Waveform | [WaveSurfer.js](https://wavesurfer.xyz/) v7 |
-| Deep Learning | [PyTorch](https://pytorch.org/) |
-| Fonts | [Inter](https://rsms.me/inter/) + [JetBrains Mono](https://www.jetbrains.com/lp/mono/) |
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- React Router
+- TanStack Query
+- Tailwind CSS
+
+### Backend
+
+- Node.js
+- TypeScript
+- Fastify (API today; Express per platform roadmap)
+- PostgreSQL (Neon)
+- Prisma
+- Redis
+- BullMQ
+
+### AI / Media
+
+- Speech-to-Text
+- Language Detection
+- Audio Processing
+- FFmpeg
+- Vocal Separation
+- Lyrics Alignment
+- Video Rendering
+
+### Storage
+
+- Object Storage
+  - Audio
+  - Video
+  - Images
+  - Generated Files
 
 ---
 

@@ -1,53 +1,32 @@
 @echo off
 echo ============================================
-echo  LRC Generator - Installation
+echo  Lyrics platform - install
 echo ============================================
 echo.
 
-:: Check Python
-python --version >nul 2>&1
+where node >nul 2>&1
 if errorlevel 1 (
-    echo [FEHLER] Python nicht gefunden. Bitte Python 3.9+ installieren.
+    echo [ERROR] Node.js 20+ required.
     pause
     exit /b 1
 )
 
-:: Create venv if missing
-if not exist venv (
-    echo Erstelle virtuelle Umgebung...
-    python -m venv venv
+call npm install
+if errorlevel 1 (
+    echo [ERROR] npm install failed.
+    pause
+    exit /b 1
 )
 
-:: Activate
-call venv\Scripts\activate.bat
-
-:: Upgrade pip
-python -m pip install --upgrade pip --quiet
-
-:: Core packages
-echo Installiere Pakete (FastAPI, Uvicorn, Whisper)...
-pip install fastapi "uvicorn[standard]" python-multipart openai-whisper
-
-:: UVR5 vocal isolation
-echo.
-echo Installiere audio-separator (UVR5 Vocal Isolation)...
-pip install "audio-separator[cpu]"
+if not exist backend\.env copy backend\.env.example backend\.env
+if not exist frontend\.env (
+  echo VITE_API_URL=>frontend\.env
+)
 
 echo.
-echo ============================================
-echo  WICHTIG: PyTorch muss separat installiert
-echo  werden, falls noch nicht vorhanden.
+echo Run Nyimba ^(one command^):
+echo   start.bat   or   npm run dev
+echo   Open http://127.0.0.1:5173
 echo.
-echo  CPU (Standard):
-echo    pip install torch torchvision torchaudio
-echo.
-echo  CUDA 12.1 (NVIDIA GPU - viel schneller!):
-echo    pip install torch torchvision torchaudio ^
-echo      --index-url https://download.pytorch.org/whl/cu121
-echo.
-echo  GPU-Beschleunigung fuer audio-separator:
-echo    pip install "audio-separator[gpu]"
-echo ============================================
-echo.
-echo Installation abgeschlossen! Starte mit start.bat
+echo See docs\RUN.md
 pause

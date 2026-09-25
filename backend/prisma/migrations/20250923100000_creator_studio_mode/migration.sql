@@ -1,0 +1,1 @@
+ALTER TABLE "Song" ADD COLUMN IF NOT EXISTS "creatorStudioMode" VARCHAR(32);

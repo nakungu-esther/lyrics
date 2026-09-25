@@ -1,0 +1,36 @@
+{
+  "name": "lyrics-platform",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:all": "concurrently -n api,web,worker -c blue,magenta,yellow \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:worker\"",
+    "redis:up": "docker-compose up -d",
+    "dev:frontend": "npm run dev -w @nyimba/frontend",
+    "dev:backend": "npm run dev -w @nyimba/backend",
+    "dev:api": "npm run dev -w @nyimba/backend",
+    "build": "npm run build -w @nyimba/backend && npm run build -w @nyimba/frontend",
+    "lint": "npm run lint -w @nyimba/backend && npm run lint -w @nyimba/frontend",
+    "format": "prettier --write \"frontend/**/*.{ts,tsx,css}\" \"backend/**/*.ts\" \"*.{js,json,md}\"",
+    "db:generate": "npm run db:generate -w @nyimba/backend",
+    "db:migrate": "npm run db:migrate -w @nyimba/backend",
+    "db:studio": "npm run db:studio -w @nyimba/backend",
+    "db:seed-admin": "npm run db:seed-admin -w @nyimba/backend",
+    "dev:worker": "npm run worker -w @nyimba/backend"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "typescript-eslint": "^8.21.0"
+  }
+}

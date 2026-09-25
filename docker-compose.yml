@@ -1,0 +1,6 @@
+# PostgreSQL: use Neon (see docs/DATABASE.md). This file is Redis only for local BullMQ.
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"

@@ -1,0 +1,620 @@
+// Phase 2 — PostgreSQL data model (Neon)
+// Hierarchy: Song → Lyrics → LyricSection → LyricLine → LyricWord
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  USER
+  ARTIST
+  ADMIN
+}
+
+enum SongStatus {
+  DRAFT
+  PROCESSING
+  AUDIO_READY
+  LANGUAGE_CONFIRMED
+  READY_FOR_REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum SongLanguageState {
+  NOT_DETECTED
+  DETECTED
+  CONFIRMATION_REQUIRED
+  CONFIRMED
+}
+
+enum LanguageSegmentSource {
+  AI_DETECTED
+  ARTIST_CONFIRMED
+  ADMIN_REVIEWED
+}
+
+enum LyricsStatus {
+  AI_GENERATED
+  ARTIST_EDITED
+  ARTIST_VERIFIED
+  ADMIN_REVIEWED
+}
+
+enum LyricSectionType {
+  VERSE
+  CHORUS
+  BRIDGE
+  INTRO
+  OUTRO
+  PRE_CHORUS
+  HOOK
+  OTHER
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum RenderJobStatus {
+  QUEUED
+  PROCESSING
+  RENDERING
+  COMPLETED
+  FAILED
+}
+
+enum ExportFormat {
+  CANVAS_4_3
+  YOUTUBE_16_9
+  TIKTOK_9_16
+  REELS_9_16
+  SQUARE_1_1
+}
+
+enum AnalyticsEventType {
+  SONG_VIEW
+  AUDIO_PLAY
+  LYRICS_VIEW
+  VIDEO_VIEW
+  DOWNLOAD
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+  ARTIST_PRO
+}
+
+enum ReportStatus {
+  OPEN
+  REVIEWED
+  DISMISSED
+  ACTION_TAKEN
+}
+
+enum VideoAspect {
+  RATIO_4_3
+  RATIO_16_9
+  RATIO_9_16
+  RATIO_1_1
+}
+
+enum ProcessingJobStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum ProcessingJobType {
+  AUDIO
+  LANGUAGE
+  LANGUAGE_DETECTION
+  TRANSCRIBE
+  MUSIC_VIDEO
+}
+
+enum SongMediaSource {
+  AUDIO
+  MUSIC_VIDEO
+}
+
+// ─── Auth & users ────────────────────────────────────────────────────────────
+
+model User {
+  id               String           @id @default(uuid()) @db.Uuid
+  email            String           @unique
+  emailVerifiedAt  DateTime?
+  passwordHash     String
+  role             UserRole         @default(USER)
+  firstName        String?
+  lastName         String?
+  displayName      String?
+  avatarUrl        String?
+  isActive         Boolean          @default(true)
+  suspendedAt      DateTime?
+  subscriptionPlan SubscriptionPlan @default(FREE)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  ownedArtists         Artist[]             @relation("ArtistOwner")
+  playlists            Playlist[]
+  notifications        Notification[]
+  reports              Report[]             @relation("ReportReporter")
+  videoProjects        VideoProject[]
+  verificationRequests ArtistVerification[] @relation("VerificationRequester")
+  verificationReviews  ArtistVerification[] @relation("VerificationReviewer")
+  lyricsVerified       Lyrics[]             @relation("LyricsVerifier")
+  sessions             Session[]
+
+  @@index([role])
+}
+
+model Session {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @db.Uuid
+  refreshHash String   @unique
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ─── Artists ─────────────────────────────────────────────────────────────────
+
+model Artist {
+  id              String   @id @default(uuid()) @db.Uuid
+  ownerUserId     String   @db.Uuid
+  slug            String   @unique
+  name            String
+  biography       String?  @db.Text
+  profileImageUrl String?
+  coverImageUrl   String?
+  genre           String?
+  location        String?
+  website         String?
+  socialLinks     Json?
+  isVerified      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  owner         User                 @relation("ArtistOwner", fields: [ownerUserId], references: [id], onDelete: Restrict)
+  albums        Album[]
+  songs         Song[]
+  songCredits   SongArtist[]
+  verifications ArtistVerification[]
+
+  @@unique([ownerUserId])
+  @@index([name])
+}
+
+model ArtistVerification {
+  id                String             @id @default(uuid()) @db.Uuid
+  artistId          String             @db.Uuid
+  requestedByUserId String             @db.Uuid
+  status            VerificationStatus @default(PENDING)
+  evidence          String?            @db.Text
+  reviewedByUserId  String?            @db.Uuid
+  reviewedAt        DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  artist      Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  requestedBy User   @relation("VerificationRequester", fields: [requestedByUserId], references: [id], onDelete: Restrict)
+  reviewedBy  User?  @relation("VerificationReviewer", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([artistId])
+  @@index([status])
+}
+
+// ─── Languages ───────────────────────────────────────────────────────────────
+
+model Language {
+  code                    String   @id @db.VarChar(16)
+  name                    String
+  isActive                Boolean  @default(true)
+  transcriptionProviderId String?
+  transcriptionModelId    String?
+  fallbackProviderId      String?
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  songsPrimary      Song[]                @relation("SongPrimaryLanguage")
+  languageSegments  LanguageSegment[]
+  lyricSections     LyricSection[]
+  lyricLines        LyricLine[]
+  lyricWords        LyricWord[]
+}
+
+// ─── Catalog ───────────────────────────────────────────────────────────────────
+
+model Album {
+  id            String    @id @default(uuid()) @db.Uuid
+  artistId      String    @db.Uuid
+  title         String
+  coverImageUrl String?
+  releaseDate   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  artist Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  songs  Song[]
+
+  @@index([artistId])
+}
+
+model Song {
+  id                   String          @id @default(uuid()) @db.Uuid
+  artistId             String          @db.Uuid
+  albumId              String?         @db.Uuid
+  title                String
+  slug                 String
+  description          String?         @db.Text
+  credits              String?         @db.Text
+  genre                String?
+  subgenre             String?
+  primaryLanguageCode  String?         @db.VarChar(16)
+  audioUrl             String?
+  audioObjectKey       String?
+  audioContentType     String?
+  audioSize            BigInt?
+  audioUploadedAt      DateTime?
+  audioCodec           String?
+  audioSampleRate      Int?
+  audioChannels        Int?
+  audioBitrate         Int?
+  processedAudioObjectKey   String?
+  processedAudioContentType String?
+  processedAudioSize        BigInt?
+  processedAudioUploadedAt  DateTime?
+  coverImageUrl        String?
+  coverObjectKey       String?
+  coverContentType     String?
+  coverSize            BigInt?
+  coverUploadedAt      DateTime?
+  durationSeconds      Float?
+  detectedLanguageCode String?         @db.VarChar(16)
+  languageConfidence   Float?
+  languageConfirmed    Boolean         @default(false)
+  languageState        SongLanguageState @default(NOT_DETECTED)
+  languageConfirmedAt  DateTime?
+  mediaSource          SongMediaSource @default(AUDIO)
+  backgroundVideoUrl   String?
+  musicVideoObjectKey  String?
+  musicVideoContentType String?
+  musicVideoSize       BigInt?
+  musicVideoUploadedAt DateTime?
+  status               SongStatus      @default(DRAFT)
+  /// Core studio: VIDEO_CLIP (upload video) or AUDIO_ONLY (upload song)
+  creatorStudioMode    String?         @db.VarChar(32)
+  releaseDate          DateTime?
+  publishedAt          DateTime?
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  artist          Artist    @relation(fields: [artistId], references: [id], onDelete: Restrict)
+  album           Album?    @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  primaryLanguage Language? @relation("SongPrimaryLanguage", fields: [primaryLanguageCode], references: [code], onDelete: SetNull)
+
+  lyrics          Lyrics[]
+  creditArtists   SongArtist[]
+  videoProjects   VideoProject[]
+  playlistEntries PlaylistSong[]
+  reports         Report[]
+  processingJobs       ProcessingJob[]
+  views                SongView[]
+  languageDetectionRuns LanguageDetectionRun[]
+  languageSegments     LanguageSegment[]
+
+  @@unique([artistId, slug])
+  @@index([status])
+  @@index([releaseDate])
+  @@index([title])
+}
+
+model LanguageDetectionRun {
+  id                  String   @id @default(uuid()) @db.Uuid
+  songId              String   @db.Uuid
+  processingJobId     String?  @db.Uuid
+  primaryLanguageCode String   @db.VarChar(16)
+  confidence          Float
+  alternatives        Json?
+  segmentSnapshot     Json?
+  providerName        String?
+  createdAt           DateTime @default(now())
+
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@index([songId, createdAt])
+}
+
+model LanguageSegment {
+  id           String                @id @default(uuid()) @db.Uuid
+  songId       String                @db.Uuid
+  languageCode String                @db.VarChar(16)
+  startTime    Float
+  endTime      Float
+  confidence   Float?
+  source       LanguageSegmentSource
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  song     Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+  language Language @relation(fields: [languageCode], references: [code], onDelete: Restrict)
+
+  @@index([songId, source])
+  @@index([songId, startTime])
+}
+
+model SongArtist {
+  songId   String @db.Uuid
+  artistId String @db.Uuid
+  role     String @default("primary")
+
+  song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+  artist Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+
+  @@id([songId, artistId])
+  @@index([artistId])
+}
+
+// ─── Lyrics tree (karaoke) ─────────────────────────────────────────────────────
+// Song → Lyrics → LyricSection → LyricLine → LyricWord
+
+model Lyrics {
+  id               String       @id @default(uuid()) @db.Uuid
+  songId           String       @db.Uuid
+  version          Int          @default(1)
+  status           LyricsStatus @default(AI_GENERATED)
+  isActive         Boolean      @default(true)
+  approvedAt       DateTime?
+  verifiedAt       DateTime?
+  verifiedByUserId String?      @db.Uuid
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  song          Song           @relation(fields: [songId], references: [id], onDelete: Cascade)
+  verifiedBy    User?          @relation("LyricsVerifier", fields: [verifiedByUserId], references: [id], onDelete: SetNull)
+  sections      LyricSection[]
+  videoProjects VideoProject[]
+  reports       Report[]
+
+  @@unique([songId, version])
+  @@index([songId, isActive])
+}
+
+model LyricSection {
+  id           String           @id @default(uuid()) @db.Uuid
+  lyricsId     String           @db.Uuid
+  sortOrder    Int
+  sectionType  LyricSectionType @default(OTHER)
+  label        String?
+  languageCode String?          @db.VarChar(16)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  lyrics   Lyrics      @relation(fields: [lyricsId], references: [id], onDelete: Cascade)
+  language Language?   @relation(fields: [languageCode], references: [code], onDelete: SetNull)
+  lines    LyricLine[]
+
+  @@index([lyricsId, sortOrder])
+}
+
+model LyricLine {
+  id           String   @id @default(uuid()) @db.Uuid
+  sectionId    String   @db.Uuid
+  sortOrder    Int
+  text         String   @db.Text
+  startTime    Float?
+  endTime      Float?
+  languageCode String?  @db.VarChar(16)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  section  LyricSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  language Language?    @relation(fields: [languageCode], references: [code], onDelete: SetNull)
+  words    LyricWord[]
+
+  @@index([sectionId, sortOrder])
+}
+
+model LyricWord {
+  id           String   @id @default(uuid()) @db.Uuid
+  lineId       String   @db.Uuid
+  sortOrder    Int
+  text         String
+  startTime    Float
+  endTime      Float
+  confidence   Float?
+  languageCode String?  @db.VarChar(16)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  line     LyricLine @relation(fields: [lineId], references: [id], onDelete: Cascade)
+  language Language? @relation(fields: [languageCode], references: [code], onDelete: SetNull)
+
+  @@index([lineId, sortOrder])
+  @@index([startTime])
+}
+
+// ─── Video ─────────────────────────────────────────────────────────────────────
+
+model VideoTemplate {
+  id          String   @id @default(uuid()) @db.Uuid
+  slug        String   @unique
+  name        String
+  description String?  @db.Text
+  config      Json
+  isPremium   Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  projects VideoProject[]
+}
+
+model VideoProject {
+  id             String   @id @default(uuid()) @db.Uuid
+  songId         String   @db.Uuid
+  lyricsId       String   @db.Uuid
+  templateId     String   @db.Uuid
+  ownerUserId    String   @db.Uuid
+  customizations Json?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  song       Song          @relation(fields: [songId], references: [id], onDelete: Restrict)
+  lyrics     Lyrics        @relation(fields: [lyricsId], references: [id], onDelete: Restrict)
+  template   VideoTemplate @relation(fields: [templateId], references: [id], onDelete: Restrict)
+  owner      User          @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  renderJobs RenderJob[]
+
+  @@index([ownerUserId])
+  @@index([songId])
+}
+
+model RenderJob {
+  id               String          @id @default(uuid()) @db.Uuid
+  videoProjectId   String          @db.Uuid
+  status           RenderJobStatus @default(QUEUED)
+  progress         Int             @default(0)
+  message          String?
+  exportFormat     ExportFormat    @default(CANVAS_4_3)
+  resolutionHeight Int             @default(1080)
+  aspect           VideoAspect?
+  width            Int?
+  height           Int?
+  outputVideoUrl   String?
+  payload          Json?
+  result           Json?
+  error            String?         @db.Text
+  retryCount       Int             @default(0)
+  startedAt        DateTime?
+  completedAt      DateTime?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  videoProject VideoProject @relation(fields: [videoProjectId], references: [id], onDelete: Cascade)
+
+  @@index([videoProjectId, status])
+  @@index([status])
+}
+
+// ─── Social & moderation ───────────────────────────────────────────────────────
+
+model Playlist {
+  id          String   @id @default(uuid()) @db.Uuid
+  ownerUserId String   @db.Uuid
+  title       String
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  owner User           @relation(fields: [ownerUserId], references: [id], onDelete: Cascade)
+  songs PlaylistSong[]
+
+  @@index([ownerUserId])
+}
+
+model PlaylistSong {
+  playlistId String   @db.Uuid
+  songId     String   @db.Uuid
+  sortOrder  Int
+  addedAt    DateTime @default(now())
+
+  playlist Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  song     Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@id([playlistId, songId])
+  @@index([songId])
+}
+
+model Notification {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  title     String
+  body      String?   @db.Text
+  readAt    DateTime?
+  data      Json?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+}
+
+model Report {
+  id             String       @id @default(uuid()) @db.Uuid
+  reporterUserId String       @db.Uuid
+  songId         String?      @db.Uuid
+  lyricsId       String?      @db.Uuid
+  reason         String
+  details        String?      @db.Text
+  status         ReportStatus @default(OPEN)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  reporter User    @relation("ReportReporter", fields: [reporterUserId], references: [id], onDelete: Restrict)
+  song     Song?   @relation(fields: [songId], references: [id], onDelete: SetNull)
+  lyrics   Lyrics? @relation(fields: [lyricsId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([songId])
+}
+
+model ProcessingJob {
+  id          String              @id @default(uuid()) @db.Uuid
+  songId      String              @db.Uuid
+  jobType     ProcessingJobType   @default(AUDIO)
+  status      ProcessingJobStatus @default(QUEUED)
+  progress    Int                 @default(0)
+  message     String?
+  error       String?             @db.Text
+  attempts    Int                 @default(0)
+  metadata    Json?
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@index([songId, status])
+  @@index([songId, jobType, createdAt])
+}
+
+model SongView {
+  id       String   @id @default(uuid()) @db.Uuid
+  songId   String   @db.Uuid
+  viewedAt DateTime @default(now())
+
+  song Song @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@index([songId])
+}
+
+model AnalyticsEvent {
+  id        String             @id @default(uuid()) @db.Uuid
+  eventType AnalyticsEventType
+  songId    String?            @db.Uuid
+  artistId  String?            @db.Uuid
+  userId    String?            @db.Uuid
+  meta      Json?
+  createdAt DateTime           @default(now())
+
+  @@index([artistId, eventType, createdAt])
+  @@index([songId, eventType])
+}

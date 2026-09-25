@@ -1,26 +1,21 @@
 @echo off
 echo ============================================
-echo  LRC Generator starten
+echo  Nyimba - one app (API + UI together)
 echo ============================================
 echo.
+echo  Open in browser:  http://127.0.0.1:5173
+echo.
 
-:: Check venv
-if not exist venv\Scripts\activate.bat (
-    echo [FEHLER] Virtuelle Umgebung nicht gefunden.
-    echo Bitte zuerst install.bat ausfuehren.
+if not exist node_modules (
+    echo Run install.bat first.
     pause
     exit /b 1
 )
 
-call venv\Scripts\activate.bat
+if not exist backend\.env copy backend\.env.example backend\.env
 
-echo Server laeuft auf http://127.0.0.1:8000
-echo Browser wird geoeffnet...
-echo Zum Beenden: Strg+C
+echo Starting API (4000) and UI (5173)...
+echo For uploads/video jobs: start Docker Desktop, then  docker-compose up -d  and  npm run dev:all
 echo.
 
-:: Open browser after short delay
-start /b cmd /c "timeout /t 2 /nobreak >nul && start http://127.0.0.1:8000"
-
-python -m uvicorn app:app --host 127.0.0.1 --port 8000
-pause
+npm run dev
