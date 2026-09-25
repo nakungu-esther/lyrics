@@ -240,6 +240,31 @@ body {
   box-shadow: 0 8px 24px rgb(30 64 175 / 0.06);
 }
 
+.hub-stat-card {
+  min-height: 112px;
+  border-radius: 0.9rem;
+  padding: 1rem;
+}
+
+.hub-stat-card p:last-of-type {
+  color: #0f1f3d;
+  font-size: 1.75rem;
+}
+
+.hub-dashboard-sidebar nav a {
+  min-height: 38px;
+  border-radius: 0.55rem;
+  font-size: 0.75rem;
+}
+
+.hub-dashboard-sidebar nav a svg {
+  color: #cbd5e1;
+}
+
+.hub-dashboard-sidebar nav a.bg-indigo-600 svg {
+  color: #ffffff;
+}
+
 .hub-dashboard-main .text-white,
 .hub-dashboard-main .text-slate-100,
 .hub-dashboard-main .text-slate-200,

@@ -11,9 +11,9 @@ import { Button } from "../ui/Button";
 function navClass(isActive: boolean) {
   return [
     "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium transition",
-    isActive
-      ? "bg-indigo-600/25 text-indigo-100"
-      : "text-slate-400 hover:bg-white/5 hover:text-slate-100",
+isActive
+      ? "bg-indigo-600 text-white shadow-lg shadow-indigo-950/30"
+      : "text-slate-400 hover:bg-slate-800/80 hover:text-slate-100",
   ].join(" ");
 }
 
@@ -35,9 +35,9 @@ export function DashboardSidebar({ onNavigate, className = "" }: DashboardSideba
         </NavLink>
       ))}
 
-      <p className="mb-1 mt-5 px-3 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
-        More
-      </p>
+<p className="mb-2 mt-6 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+        Library
+      </p>
       {USER_DASHBOARD_MORE.map(({ to, label, end, icon }) => (
         <NavLink key={to} to={to} end={end} onClick={onNavigate} className={({ isActive }) => navClass(isActive)}>
           <HubIcon name={icon} size={18} className="opacity-90" />

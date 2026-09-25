@@ -12,7 +12,7 @@ type StatCardProps = {
 
 export function StatCard({ label, value, href, icon, trend }: StatCardProps) {
   const inner = (
-    <Card hover={Boolean(href)} className="flex flex-col gap-2">
+    <Card hover={Boolean(href)} className="hub-stat-card flex flex-col gap-2">
       <div className="flex items-start justify-between gap-2">
         <p className="text-sm text-zinc-400">{label}</p>
         {icon && (
