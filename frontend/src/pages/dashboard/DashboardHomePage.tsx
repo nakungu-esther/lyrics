@@ -73,7 +73,7 @@ export function DashboardHomePage() {
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <QuickActionCard title="Upload Video" description="Clip + synced lyrics." href="/create?mode=video" icon="videoClip" />
           <QuickActionCard title="Upload Audio" description="Template backgrounds." href="/create?mode=audio" icon="audio" />
-          <QuickActionCard title="Create New Video" description="Full AI pipeline." href="/create" icon="sparkles" />
+          <QuickActionCard title="Create New Video" description="Complete video workflow." href="/create" icon="sparkles" />
           <QuickActionCard title="Browse Templates" description="Preview styles first." href="/dashboard/templates" icon="templates" />
         </div>
       </div>

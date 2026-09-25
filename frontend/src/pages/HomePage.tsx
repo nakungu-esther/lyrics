@@ -20,7 +20,7 @@ export function HomePage() {
         style={{ ["--hero-image" as string]: `url(${MOCKUP_IMAGES.heroSinger})` }}
       >
         <div className="mx-auto flex max-w-7xl flex-col justify-center px-4 py-16 md:px-8 md:py-24 lg:max-w-2xl lg:pl-12">
-          <p className="text-sm font-medium text-blue-400">AI-powered lyric videos</p>
+          <p className="text-sm font-medium text-blue-400">Beautiful lyric videos</p>
           <h1 className="mt-3 text-4xl font-extrabold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-[3.25rem]">
             {APP_TAGLINE}
           </h1>
@@ -91,7 +91,7 @@ export function HomePage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               ["01", "Upload", "Drop in a track or music video."],
-              ["02", "AI analysis", "Detect language and generate lyrics."],
+              ["02", "Song analysis", "Detect language and generate lyrics."],
               ["03", "Make it yours", "Sync lines, choose a template, customize."],
               ["04", "Share everywhere", "Render once, publish everywhere."],
             ].map(([number, title, description]) => (
