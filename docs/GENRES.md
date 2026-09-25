@@ -1,4 +1,4 @@
-# Genres & Gospel on Nyimba
+# Genres & Gospel on LyricsHub
 
 **Genre and language are independent fields on `Song`.**
 

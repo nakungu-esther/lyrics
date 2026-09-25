@@ -127,7 +127,7 @@ export function LoginPage() {
 
         <h1 className="text-2xl font-semibold tracking-tight">Log in</h1>
 
-        <p className="text-sm text-zinc-400">Access your Nyimba dashboard.</p>
+        <p className="text-sm text-zinc-400">Access your LyricsHub dashboard.</p>
 
       </div>
 

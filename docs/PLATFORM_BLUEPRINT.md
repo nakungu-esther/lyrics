@@ -12,7 +12,7 @@ Blueprint for the **React + TypeScript + PostgreSQL** application. Use this docu
 |------|------|
 | `frontend/` | React, Vite, React Router, TanStack Query, Tailwind |
 | `backend/` | Express, Prisma, Neon, BullMQ enqueue + workers |
-| `frontend/src/pages/LrcStudioPage.tsx`, `CreateStudioPage.tsx`, `StudioEditorPage.tsx` | **Nyimba LRC** — React/TS UI (no Python) |
+| `frontend/src/pages/LrcStudioPage.tsx`, `CreateStudioPage.tsx`, `StudioEditorPage.tsx` | **LyricsHub LRC Studio** — React/TS UI (no Python) |
 | `static/` | Archived legacy JS mockups only — **not used at runtime** |
 
 ---
@@ -347,7 +347,7 @@ Keep **AI and FFmpeg off the request thread** — API creates `render_jobs` / tr
 
 Job record shape (API + DB): `id`, `type`, `status`, `progress`, `message`, `payload`, `result`, `error`, `user_id`, `song_id`.
 
-Existing LRCGen jobs (`transcribe`, `isolate`, `enhanced`) map to **`transcription`** + **`alignment`** queues in Phase 2.
+Legacy LRC tool jobs (`transcribe`, `isolate`, `enhanced`) map to **`transcription`** + **`alignment`** queues in Phase 2.
 
 ---
 
@@ -400,7 +400,7 @@ Existing LRCGen jobs (`transcribe`, `isolate`, `enhanced`) map to **`transcripti
 
 ---
 
-## Mapping from current LRCGen repo
+## Mapping from the legacy LRC prototype
 
 | Today | Blueprint module |
 |-------|------------------|

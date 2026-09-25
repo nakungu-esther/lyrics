@@ -161,7 +161,7 @@ export function SongLyricsEditorPage() {
           </Link>
           <Link to="/lrc-studio">
             <Button type="button" variant="ghost">
-              Nyimba LRC (new upload)
+              LyricsHub LRC (new upload)
             </Button>
           </Link>
         </div>

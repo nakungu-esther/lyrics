@@ -17,7 +17,7 @@ const backendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 dotenv.config({ path: path.join(backendRoot, ".env") });
 import { prisma } from "../src/lib/prisma.js";
 import { hashPassword } from "../src/lib/password.js";
-const email = (process.env.SEED_ADMIN_EMAIL ?? "admin@nyimba.local").trim().toLowerCase();
+const email = (process.env.SEED_ADMIN_EMAIL ?? "admin@lyricshub.local").trim().toLowerCase();
 const password = process.env.SEED_ADMIN_PASSWORD ?? "ChangeMeAdmin123!";
 const firstName = process.env.SEED_ADMIN_FIRST_NAME?.trim() || "Platform";
 const lastName = process.env.SEED_ADMIN_LAST_NAME?.trim() || "Admin";
@@ -68,7 +68,7 @@ if (!artist) {
     data: {
       ownerUserId: user.id,
       slug,
-      name: "Nyimba Admin",
+      name: "LyricsHub Admin",
       biography: "Seeded administrator account with artist access for testing.",
       isVerified: true,
     },

@@ -71,7 +71,7 @@ export function CreateArtistPage() {
       <div>
         <h1 className="text-2xl font-semibold">Create artist profile</h1>
         <p className="mt-2 text-sm text-zinc-400">
-          Share your music identity on Nyimba. Verification is reviewed separately—you are not
+          Share your music identity on LyricsHub. Verification is reviewed separately—you are not
           verified automatically.
         </p>
       </div>

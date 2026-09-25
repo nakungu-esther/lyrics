@@ -1,6 +1,6 @@
 # Phase 2 — Step 2 (database) & Step 3 (auth)
 
-Nyimba already implements the full Step 2 entity model in `backend/prisma/schema.prisma` (User, Artist, Song, lyrics hierarchy, video, playlists, notifications, reports, enums, indexes). Binary media is **not** stored in Postgres—only URLs/keys.
+LyricsHub already implements the full Step 2 entity model in `backend/prisma/schema.prisma` (User, Artist, Song, lyrics hierarchy, video, playlists, notifications, reports, enums, indexes). Binary media is **not** stored in Postgres—only URLs/keys.
 
 This doc is the **handoff checklist** for Steps 2–3: what exists, how to run migrations, and how to verify auth.
 
@@ -54,9 +54,9 @@ npm run db:migrate
 2. Start API: `npm run dev:api` or `npm run dev` from root.
 3. `GET http://127.0.0.1:4000/api/v1/health/db` → `{ "status": "ok", "database": "connected" }`.
 
-### Curriculum vs Nyimba (Step 2 notes)
+### Curriculum vs LyricsHub (Step 2 notes)
 
-| Spec | Nyimba |
+| Spec | LyricsHub |
 |------|--------|
 | `LyricWord.languageId` | FK via `languageCode` → `Language.code` |
 | Artist verification `VERIFIED` | Enum value `APPROVED` |
@@ -96,7 +96,7 @@ npm run db:migrate
 ### Start backend
 
 ```powershell
-cd C:\Users\THINKPAD\LRCGen
+cd path\to\lyricshub
 npm run dev
 # API only:
 npm run dev:api
@@ -112,7 +112,7 @@ curl -X POST http://127.0.0.1:4000/api/v1/auth/register ^
   -d "{\"email\":\"you@example.com\",\"password\":\"password123\",\"firstName\":\"Jane\",\"lastName\":\"Doe\"}"
 ```
 
-**Login** (sets `nyimba_refresh` cookie + returns `accessToken`)
+**Login** (sets HTTP-only refresh cookie + returns `accessToken`)
 
 ```bash
 curl -X POST http://127.0.0.1:4000/api/v1/auth/login ^

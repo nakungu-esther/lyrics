@@ -35,7 +35,7 @@ export function buildLrcContent(
   const lines: string[] = [];
   if (meta.title?.trim()) lines.push(`[ti:${meta.title.trim()}]`);
   if (meta.artist?.trim()) lines.push(`[ar:${meta.artist.trim()}]`);
-  lines.push("[by:Nyimba]");
+  lines.push("[by:LyricsHub]");
   if (meta.enhanced) lines.push("[enhanced:true]");
   lines.push("");
 

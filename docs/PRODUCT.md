@@ -1,8 +1,8 @@
-# Nyimba — Product definition
+# LyricsHub — Product definition
 
-**Nyimba** is an AI-powered **Ugandan music, lyrics, and lyric-video platform**.
+**LyricsHub** is an AI-powered **Ugandan music, lyrics, and lyric-video platform**.
 
-**Core experience (Nyimba Studio):** Upload **video** or **audio** → AI analyzes → detect language → generate & synchronize lyrics → **automatic initial video project** → **live editor** (preview while media plays) → customize templates & styling → render.
+**Core experience (LyricsHub Studio):** Upload **video** or **audio** → AI analyzes → detect language → generate & synchronize lyrics → **automatic initial video project** → **live editor** (preview while media plays) → customize templates & styling → render.
 
 Entry: **`/create`** or **`/lrc-studio`** → **`/studio/:songId`** (React + TypeScript + Node only — **no Python**)
 

@@ -1,13 +1,13 @@
-# How to run Nyimba
+# How to run LyricsHub
 
-Nyimba is **one product**: you open **one URL** in the browser. Under the hood it is **two Node apps** in this repo (`frontend` + `backend`) — that is normal for React + API, not “many separate products.”
+LyricsHub is **one product**: you open **one URL** in the browser. Under the hood it is **two Node apps** in this repo (`frontend` + `backend`) — that is normal for React + API, not “many separate products.”
 
 ## Repo layout
 
 | Folder | Purpose |
 |--------|---------|
-| **`frontend/`** | Nyimba UI |
-| **`backend/`** | Nyimba API + workers |
+| **`frontend/`** | LyricsHub UI |
+| **`backend/`** | LyricsHub API + workers |
 | **`docs/`** | Documentation |
 
 ## Requirements
@@ -28,7 +28,7 @@ Edit **`backend\.env`** — set `DATABASE_URL`, then:
 npm run db:migrate
 ```
 
-## Run Nyimba (one command)
+## Run LyricsHub (one command)
 
 ```bat
 start.bat
@@ -66,7 +66,7 @@ Without Redis, remove or comment out **`REDIS_URL`** in `backend/.env` — the w
 | `Port 4000 is already in use` | Stop the old API or free the port (message in the api terminal shows a PowerShell one-liner) |
 | `P1001` / Can't reach database server (Neon) | Open [Neon console](https://console.neon.tech) — **resume** project if auto-suspended; paste a new **pooled** connection string into `backend/.env` as `DATABASE_URL`; check internet/VPN/firewall; hit http://127.0.0.1:4000/api/v1/health/db |
 | Vite `ECONNRESET` on `/api/v1/auth/refresh` | Usually the API **crashed** or DB was down during refresh — restart `npm run dev`; fix `DATABASE_URL` first |
-| Login shows **“Something went wrong on our side”** (admin or any user) | Almost always **database down**. API `/health` is OK but `/health/db` fails — fix `DATABASE_URL` in `backend/.env`, resume Neon, run `npm run db:migrate`, restart API. Then seed admin: `cd backend && npm run db:seed-admin` (default `admin@nyimba.local` / `ChangeMeAdmin123!` unless you set `SEED_ADMIN_*` in `.env`). |
+| Login shows **“Something went wrong on our side”** (admin or any user) | Almost always **database down**. API `/health` is OK but `/health/db` fails — fix `DATABASE_URL` in `backend/.env`, resume Neon, run `npm run db:migrate`, restart API. Then seed admin: `cd backend && npm run db:seed-admin` (default `admin@lyricshub.local` / `ChangeMeAdmin123!` unless you set `SEED_ADMIN_*` in `.env`). |
 | `Unknown argument creatorStudioMode` | Schema behind code — run `npm run db:migrate` then `npm run db:generate`, restart API |
 
 ## Health check
@@ -74,7 +74,7 @@ Without Redis, remove or comment out **`REDIS_URL`** in `backend/.env` — the w
 - UI: http://127.0.0.1:5173  
 - API: http://127.0.0.1:4000/api/v1/health  
 
-## Nyimba LRC & Studio (React + TypeScript)
+## LyricsHub LRC & Studio (React + TypeScript)
 
 All LRC, transcription, and lyric-video creation runs on **Node.js** — there is **no Python** app in this repo.
 

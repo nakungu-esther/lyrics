@@ -1,4 +1,4 @@
-/** Nyimba launch languages (matches seed-languages.sql). */
+/** LyricsHub launch languages (matches seed-languages.sql). */
 export const SUPPORTED_LANGUAGES = [
   { code: "lg", name: "Luganda", flag: "🇺🇬" },
   { code: "en", name: "English", flag: "🇬🇧" },

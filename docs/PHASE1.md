@@ -3,7 +3,7 @@
 Monorepo with **two apps** that run **independently**:
 
 ```text
-lyrics-platform/          # repo root (Nyimba)
+lyricshub/                # repo root (LyricsHub)
 ├── frontend/             # React + TypeScript + Vite + Tailwind + Router + TanStack Query
 ├── backend/              # Node + TypeScript + Express + Prisma + PostgreSQL (Neon)
 ├── eslint.config.js      # shared ESLint

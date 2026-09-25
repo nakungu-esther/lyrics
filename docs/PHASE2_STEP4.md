@@ -24,7 +24,7 @@ Backend must be running on `http://127.0.0.1:4000` (see `docs/RUN.md`).
 ## Commands
 
 ```powershell
-cd C:\Users\THINKPAD\LRCGen
+cd path\to\lyricshub
 npm install
 npm run dev
 ```

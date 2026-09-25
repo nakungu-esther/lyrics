@@ -144,7 +144,7 @@ export function RegisterPage() {
 
         <h1 className="text-2xl font-semibold tracking-tight">Create account</h1>
 
-        <p className="text-sm text-zinc-400">Join Nyimba to save lyrics and videos.</p>
+        <p className="text-sm text-zinc-400">Join LyricsHub to save lyrics and videos.</p>
 
       </div>
 

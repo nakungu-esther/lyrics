@@ -24,7 +24,7 @@ export type AudioProbeResult = {
 export type ProgressReporter = (progress: number, message: string) => Promise<void>;
 
 function tempJobDir(jobId: string): string {
-  const base = env.workerTempDir || path.join(os.tmpdir(), "nyimba");
+  const base = env.workerTempDir || path.join(os.tmpdir(), "lyricshub");
   return path.join(base, jobId);
 }
 

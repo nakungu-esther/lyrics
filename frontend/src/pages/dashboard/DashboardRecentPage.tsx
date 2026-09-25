@@ -6,7 +6,7 @@ export function DashboardRecentPage() {
       <h1 className="text-xl font-semibold">Recently Played</h1>
       <EmptyState
         title="No recently played songs"
-        description="When you listen on Nyimba, your recent tracks will show up here."
+        description="When you listen on LyricsHub, your recent tracks will show up here."
       />
     </div>
   );

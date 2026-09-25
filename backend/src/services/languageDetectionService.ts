@@ -67,7 +67,7 @@ export async function retryLanguageDetectionJob(songId: string, userId: string):
 }
 
 function tempDir(jobId: string): string {
-  const base = env.workerTempDir || path.join(os.tmpdir(), "nyimba");
+  const base = env.workerTempDir || path.join(os.tmpdir(), "lyricshub");
   return path.join(base, `lang-${jobId}`);
 }
 

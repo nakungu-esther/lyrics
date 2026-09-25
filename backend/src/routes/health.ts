@@ -9,7 +9,7 @@ export const healthRouter = Router();
 healthRouter.get("/health", (_req, res) => {
   res.json({
     status: "ok",
-    service: "nyimba-api",
+    service: "lyricshub-api",
     timestamp: new Date().toISOString(),
   });
 });

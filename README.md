@@ -1,4 +1,4 @@
-# Nyimba
+# LyricsHub
 
 **AI-powered Ugandan music, lyrics, and lyric-video platform** — artists upload songs and videos, confirm languages (Luganda, English, Runyankole, Lusoga, Acholi, Lugisu, Lugwere, Swahili), get AI transcriptions with timings, verify lyrics, build **Gospel** and other catalogs, and create lyric videos for listeners to search, playlist, and watch.
 
@@ -6,7 +6,7 @@
 
 ### Monorepo (TypeScript only — no Python)
 
-- **`frontend/`** — React + TypeScript + Vite (Nyimba UI, LRC Studio, lyric-video editor)
+- **`frontend/`** — React + TypeScript + Vite (LyricsHub UI, LRC Studio, lyric-video editor)
 - **`backend/`** — Node.js + Express + Prisma + BullMQ (AI transcription, language detection, render jobs)
 
 **Platform:** `start.bat` or `npm run dev` → **http://127.0.0.1:5173**  
@@ -128,7 +128,7 @@ Whisper models download automatically on first transcription (~150 MB for `base`
 start.bat
 ```
 
-Nyimba: `http://127.0.0.1:5173` (API `:4000`). LRC & studio: `/create` or `/lrc-studio`. Use `npm run dev:all` for AI jobs.
+LyricsHub: `http://127.0.0.1:5173` (API `:4000`). Create flow & LRC Studio: `/create` or `/lrc-studio`. Use `npm run dev:all` for AI jobs.
 
 ---
 

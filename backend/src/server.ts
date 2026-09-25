@@ -15,7 +15,7 @@ try {
   await ensureVideoTemplates();
 } catch (err) {
   console.warn(
-    "[Nyimba] Database not ready — set DATABASE_URL in backend/.env and run npm run db:migrate",
+    "[LyricsHub] Database not ready — set DATABASE_URL in backend/.env and run npm run db:migrate",
   );
   console.warn(err instanceof Error ? err.message : err);
 }
@@ -23,11 +23,11 @@ try {
 if (env.databaseUrl) {
   const dbOk = await connectDatabase();
   if (dbOk) {
-    console.log("[Nyimba] Database connected");
+    console.log("[LyricsHub] Database connected");
     startDatabaseKeepAlive();
   } else {
     console.warn(
-      "[Nyimba] Cannot reach PostgreSQL (Neon). Auth and data routes will return 503 until this is fixed.",
+      "[LyricsHub] Cannot reach PostgreSQL (Neon). Auth and data routes will return 503 until this is fixed.",
     );
     console.warn(
       "  → Neon console: resume project if suspended, copy a fresh pooled connection string into backend/.env",
@@ -40,22 +40,22 @@ if (env.redisUrl) {
   const redisOk = await pingRedis();
   setRedisQueueEnabledFromBoot(redisOk);
   if (redisOk) {
-    console.log("[Nyimba] Redis connected (background worker queues enabled)");
+    console.log("[LyricsHub] Redis connected (background worker queues enabled)");
   } else {
     console.warn(
-      "[Nyimba] Redis not reachable — uploads will still work; jobs run inline in this API process.",
+      "[LyricsHub] Redis not reachable — uploads will still work; jobs run inline in this API process.",
     );
     console.warn("  → Start Redis: Docker Desktop + docker-compose up -d");
   }
 } else {
-  console.log("[Nyimba] REDIS_URL not set — jobs run inline in the API process");
+  console.log("[LyricsHub] REDIS_URL not set — jobs run inline in the API process");
 }
 
 const app = createApp();
 
 const onListen = (): void => {
   const base = env.isProduction ? "0.0.0.0" : "127.0.0.1";
-  console.log(`Nyimba listening on http://${base}:${env.port} (API)`);
+  console.log(`LyricsHub listening on http://${base}:${env.port} (API)`);
   console.log(`Health: http://127.0.0.1:${env.port}/api/v1/health`);
 };
 

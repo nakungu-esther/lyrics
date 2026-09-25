@@ -1,5 +1,5 @@
 {
-  "name": "lyrics-platform",
+  "name": "lyricshub",
   "private": true,
   "workspaces": [
     "frontend",
@@ -9,17 +9,17 @@
     "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:all": "concurrently -n api,web,worker -c blue,magenta,yellow \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:worker\"",
     "redis:up": "docker-compose up -d",
-    "dev:frontend": "npm run dev -w @nyimba/frontend",
-    "dev:backend": "npm run dev -w @nyimba/backend",
-    "dev:api": "npm run dev -w @nyimba/backend",
-    "build": "npm run build -w @nyimba/backend && npm run build -w @nyimba/frontend",
-    "lint": "npm run lint -w @nyimba/backend && npm run lint -w @nyimba/frontend",
+    "dev:frontend": "npm run dev -w @lyricshub/frontend",
+    "dev:backend": "npm run dev -w @lyricshub/backend",
+    "dev:api": "npm run dev -w @lyricshub/backend",
+    "build": "npm run build -w @lyricshub/backend && npm run build -w @lyricshub/frontend",
+    "lint": "npm run lint -w @lyricshub/backend && npm run lint -w @lyricshub/frontend",
     "format": "prettier --write \"frontend/**/*.{ts,tsx,css}\" \"backend/**/*.ts\" \"*.{js,json,md}\"",
-    "db:generate": "npm run db:generate -w @nyimba/backend",
-    "db:migrate": "npm run db:migrate -w @nyimba/backend",
-    "db:studio": "npm run db:studio -w @nyimba/backend",
-    "db:seed-admin": "npm run db:seed-admin -w @nyimba/backend",
-    "dev:worker": "npm run worker -w @nyimba/backend"
+    "db:generate": "npm run db:generate -w @lyricshub/backend",
+    "db:migrate": "npm run db:migrate -w @lyricshub/backend",
+    "db:studio": "npm run db:studio -w @lyricshub/backend",
+    "db:seed-admin": "npm run db:seed-admin -w @lyricshub/backend",
+    "dev:worker": "npm run worker -w @lyricshub/backend"
   },
   "engines": {
     "node": ">=20"

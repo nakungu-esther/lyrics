@@ -6,5 +6,5 @@ if (-not (Test-Path node_modules)) {
 if (-not (Test-Path backend\.env)) {
     Copy-Item backend\.env.example backend\.env
 }
-Write-Host "Nyimba → http://127.0.0.1:5173"
+Write-Host "LyricsHub → http://127.0.0.1:5173"
 npm run dev

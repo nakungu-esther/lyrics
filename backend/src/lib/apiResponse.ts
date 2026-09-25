@@ -34,7 +34,7 @@ export function sendError(
   res.status(status).json(body);
 }
 
-/** Nyimba auth responses also include top-level `user` + `accessToken` for the SPA. */
+/** LyricsHub auth responses also include top-level `user` + `accessToken` for the SPA. */
 export function sendAuthResult(
   res: Response,
   status: number,

@@ -29,7 +29,7 @@ creatorRouter.use(authenticate);
 creatorRouter.post("/setup", loadCreatorArtist, asyncHandler(async (req, res) => {
   res.json({
     artist: req.artist,
-    message: "Nyimba Studio ready.",
+    message: "LyricsHub Studio ready.",
   });
 }));
 

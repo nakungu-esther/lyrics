@@ -3,7 +3,7 @@
 This document gives Claude Code everything it needs to implement Enhanced LRC
 support in a React / JS music player. It covers the file format, parsing,
 data structures, synchronisation logic, and recommended component design.
-All format details are derived from the LRCGen tool that produces these files.
+All format details are derived from **LyricsHub** LRC export (Node API).
 
 ---
 
@@ -30,7 +30,7 @@ karaoke-style highlighting as the song plays.
 ```
 [ti:Song Title]
 [ar:Artist Name]
-[by:LRCGen]
+[by:LyricsHub]
 [enhanced:true]
 ```
 
@@ -49,7 +49,7 @@ mm:ss.xx
 
 ### 1.3 Syllable mode
 
-When LRCGen exports in **syllable** mode, each `<tag>token` represents a
+When LyricsHub exports in **syllable** mode, each `<tag>token` represents a
 single syllable rather than a full word. Syllables are joined into words
 by the display layer (see §4.3). You can detect syllable mode by checking
 `[mode:syllable]` in the header — or just treat every token as an atom and
@@ -747,7 +747,7 @@ Below is a minimal sample file you can use for testing the parser:
 ```
 [ti:Test Song]
 [ar:Test Artist]
-[by:LRCGen]
+[by:LyricsHub]
 [enhanced:true]
 
 [00:05.00]<00:05.00>Hello <00:05.40>world <00:05.80>this <00:06.10>is <00:06.40>a <00:06.70>test
@@ -760,16 +760,15 @@ correct `words` arrays for each line.
 
 ---
 
-## 10. How LRCGen produces these files (for context)
+## 10. How LyricsHub produces these files (for context)
 
-LRCGen is a FastAPI + Python tool that:
+LyricsHub (React + Node) runs transcription and alignment in the worker pipeline:
 
-1. Accepts an MP3/WAV upload and optional lyrics text
-2. Runs OpenAI Whisper (or WhisperX for better accuracy) with `word_timestamps=True`
-3. Aligns auto-detected word timestamps to user-supplied lyrics lines
+1. Accepts audio upload and optional lyrics text
+2. Runs Whisper (local or configured provider) with word-level timings
+3. Aligns detected word timestamps to user-supplied lyrics lines
 4. Optionally splits word timestamps into syllable timestamps proportionally
-   via `pyphen` (character-count-weighted duration splitting)
-5. Exports the `[mm:ss.xx]<mm:ss.xx>word` format via `/api/export_enhanced`
+5. Exports the `[mm:ss.xx]<mm:ss.xx>word` format from the platform LRC API
 
 The exported files are standard `.lrc` extension with the `[enhanced:true]`
 header tag. Any player that implements the parser in §2 will work.

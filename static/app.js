@@ -1075,7 +1075,7 @@ function generateLRC() {
   const lines  = [];
   if (title)  lines.push(`[ti:${title}]`);
   if (artist) lines.push(`[ar:${artist}]`);
-  lines.push('[by:LRC Generator]');
+  lines.push('[by:LyricsHub]');
   lines.push('');
   [...S.segments].sort((a,b) => a.start - b.start).forEach(seg => {
     lines.push(`${fmtLRC(seg.start)}${seg.text.trim()}`);

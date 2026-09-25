@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { CreateStudioPage } from "./CreateStudioPage";
 
 /**
- * Nyimba LRC — 100% React + TypeScript + Node API (no Python).
+ * LyricsHub LRC Studio — React + TypeScript + Node API.
  * Same create flow: upload video or audio → AI lyrics → /studio editor.
  */
 export function LrcStudioPage() {

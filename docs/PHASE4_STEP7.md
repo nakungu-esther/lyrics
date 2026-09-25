@@ -44,7 +44,7 @@ No cloud bucket required. Files land under `STORAGE_ROOT` with keys like `songs/
 STORAGE_DRIVER=s3
 STORAGE_ENDPOINT=https://....r2.cloudflarestorage.com
 STORAGE_REGION=auto
-STORAGE_BUCKET=nyimba-media
+STORAGE_BUCKET=lyricshub-media
 STORAGE_ACCESS_KEY=...
 STORAGE_SECRET_KEY=...
 STORAGE_FORCE_PATH_STYLE=true

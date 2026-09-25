@@ -379,7 +379,7 @@ export async function ensureCreatorArtist(userId: string): Promise<Artist> {
 
   const view = await createArtistProfile(userId, {
     name: display,
-    biography: "Personal lyric videos and clips on Nyimba.",
+    biography: "Personal lyric videos and clips on LyricsHub.",
   });
   return prisma.artist.findUniqueOrThrow({ where: { id: view.id } });
 }

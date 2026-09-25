@@ -1,6 +1,6 @@
 @echo off
 echo ============================================
-echo  Lyrics platform - install
+echo  LyricsHub - install
 echo ============================================
 echo.
 
@@ -24,7 +24,7 @@ if not exist frontend\.env (
 )
 
 echo.
-echo Run Nyimba ^(one command^):
+echo Run LyricsHub ^(one command^):
 echo   start.bat   or   npm run dev
 echo   Open http://127.0.0.1:5173
 echo.

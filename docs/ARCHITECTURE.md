@@ -525,7 +525,7 @@ Aligns with your rules: **incremental**, architecture first.
 - `LanguageDetectionProvider` + per-language STT routing
 - Workers: detect → transcribe → align → `READY_FOR_REVIEW`
 - Mixed-language sections persisted
-- **Lyrics editor** + **Lyrics timeline** + waveform (port patterns from legacy LRCGen)
+- **Lyrics editor** + **Lyrics timeline** + waveform (port patterns from the legacy LRC prototype)
 - Status: `AI_GENERATED` → `ARTIST_EDITED` → `ARTIST_VERIFIED`
 
 **Exit:** End-to-end upload → lyrics with word timings → artist saves + verifies.

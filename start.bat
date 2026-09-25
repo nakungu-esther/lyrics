@@ -1,6 +1,6 @@
 @echo off
 echo ============================================
-echo  Nyimba - one app (API + UI together)
+echo  LyricsHub - one app (API + UI together)
 echo ============================================
 echo.
 echo  Open in browser:  http://127.0.0.1:5173

@@ -36,7 +36,7 @@ Migration: `20250923210000_audio_processing_pipeline`
 | Variable | Purpose |
 |----------|---------|
 | `REDIS_URL` | BullMQ (required for production-style workers) |
-| `WORKER_TEMP_DIR` | FFmpeg temp dir (default: OS temp / `nyimba`) |
+| `WORKER_TEMP_DIR` | FFmpeg temp dir (default: OS temp / `lyricshub`) |
 | `AUDIO_TARGET_SAMPLE_RATE` | Default `16000` |
 | `AUDIO_TARGET_CHANNELS` | Default `1` (mono) |
 | `BULLMQ_JOB_ATTEMPTS` | Default `3` |

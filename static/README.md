@@ -1,6 +1,6 @@
 # Legacy static assets (reference only)
 
-This folder held an early vanilla-JS LRC prototype. **Nyimba does not run Python or these scripts in production.**
+This folder held an early vanilla-JS LRC prototype. **LyricsHub does not run Python or these scripts in production.**
 
 All LRC, transcription, sync, and lyric-video flows are implemented in:
 

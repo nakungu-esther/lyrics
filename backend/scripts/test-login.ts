@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const backendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 dotenv.config({ path: path.join(backendRoot, ".env") });
 
-const email = process.env.SEED_ADMIN_EMAIL?.trim() || "admin@nyimba.local";
+const email = process.env.SEED_ADMIN_EMAIL?.trim() || "admin@lyricshub.local";
 const password = process.env.SEED_ADMIN_PASSWORD || "ChangeMeAdmin123!";
 
 const { loginUser } = await import("../src/services/authService.js");

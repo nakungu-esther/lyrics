@@ -1,4 +1,4 @@
-# Nyimba setup (PowerShell — run from repo root)
+# LyricsHub setup (PowerShell — run from repo root)
 Set-Location $PSScriptRoot
 
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
