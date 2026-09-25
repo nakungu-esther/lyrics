@@ -54,7 +54,7 @@ export function ArtistLayout() {
           </div>
         )}
 
-        <main className="min-w-0 flex-1 overflow-auto p-4 pb-24 md:p-8 md:pb-8">
+        <main className="hub-dashboard-main min-w-0 flex-1 overflow-auto p-4 pb-24 md:p-8 md:pb-8">
           <div className="mx-auto max-w-6xl">
             <Outlet />
           </div>

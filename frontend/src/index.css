@@ -100,6 +100,42 @@ body {
   border-bottom: 1px solid transparent;
 }
 
+.hub-dashboard-main {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  color: #172033;
+}
+
+.hub-dashboard-main .hub-card {
+  border-color: #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 0.06);
+}
+
+.hub-dashboard-main .text-white,
+.hub-dashboard-main .text-slate-100,
+.hub-dashboard-main .text-slate-200,
+.hub-dashboard-main .text-slate-300 {
+  color: #172033;
+}
+
+.hub-dashboard-main .text-slate-400,
+.hub-dashboard-main .text-slate-500 {
+  color: #64748b;
+}
+
+.hub-dashboard-main .border-slate-700,
+.hub-dashboard-main .border-slate-700\/80,
+.hub-dashboard-main .border-slate-800,
+.hub-dashboard-main .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e2e8f0;
+}
+
+.hub-dashboard-main .bg-slate-800,
+.hub-dashboard-main .bg-slate-800\/50,
+.hub-dashboard-main .bg-slate-900\/60 {
+  background-color: #f8fafc;
+}
+
 .hub-panel-light {
   background: var(--color-hub-light-bg);
   color: #1e293b;
